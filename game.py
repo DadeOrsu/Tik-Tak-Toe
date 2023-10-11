@@ -52,10 +52,9 @@ class Game:
     def is_valid_move(self, move):
         """Return True if move is valid, and False otherwise."""
         row, col = move.row, move.col
-        # TODO: check that the current move has not been played already 
-        # and that there is no winner yet. Note that non-played cells
-        # contain an empty string (i.e. ""). 
-        # Use variables no_winner and move_not_played.
+        no_winner = True
+        move_not_played = move.label != ""
+        # check if there is a winner comparing the winning combos with the current moves
 
         return no_winner and move_not_played
 
@@ -67,6 +66,8 @@ class Game:
         # Do not return any values but set variables  self._has_winner 
         # and self.winner_combo in case of winning combo.
         # Hint: you can scan pre-computed winning combos in self._winning_combos
+
+
 
     def has_winner(self):
         """Return True if the game has a winner, and False otherwise."""
@@ -81,6 +82,10 @@ class Game:
         """Return a toggled player."""
         # TODO: switches self.current_player to the other player.
         # Hint: https://docs.python.org/3/library/functions.html#next
+        if self.current_player == DEFAULT_PLAYERS[0]:
+            self.current_player = DEFAULT_PLAYERS[1]
+        else:
+            self.current_player = DEFAULT_PLAYERS[0]
 
     def reset_game(self):
         """Reset the game state to play again."""
