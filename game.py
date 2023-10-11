@@ -62,12 +62,19 @@ class Game:
         """Process the current move and check if it's a win."""
         row, col = move.row, move.col
         self._current_moves[row][col] = move
-        # TODO: check whether the current move leads to a winning combo.
-        # Do not return any values but set variables  self._has_winner 
-        # and self.winner_combo in case of winning combo.
-        # Hint: you can scan pre-computed winning combos in self._winning_combos
-
-
+        x = 0
+        o = 0
+        for combo in self._winning_combos:
+            for move in combo:
+                if self._current_moves[move[0]][move[1]].label == "X":
+                    x += 1
+                if self._current_moves[move[0]][move[1]].label == "O":
+                    o += 1
+            if x == 3 or o == 3:
+                self._has_winner = x == 3 or o == 3
+                return
+            x = 0
+            o = 0
 
     def has_winner(self):
         """Return True if the game has a winner, and False otherwise."""
@@ -77,6 +84,11 @@ class Game:
         """Return True if the game is tied, and False otherwise."""
         # TODO: check whether a tie was reached.
         # There is no winner and all moves have been tried.
+        for r in range(0, 3):
+            for c in range(0, 3):
+                if self._current_moves[r][c].label == "":
+                    return False
+        return True
 
     def toggle_player(self):
         """Return a toggled player."""
