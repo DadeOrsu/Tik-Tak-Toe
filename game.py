@@ -54,8 +54,6 @@ class Game:
         row, col = move.row, move.col
         no_winner = True
         move_not_played = move.label != ""
-        # check if there is a winner comparing the winning combos with the current moves
-
         return no_winner and move_not_played
 
     def process_move(self, move):
@@ -82,8 +80,6 @@ class Game:
 
     def is_tied(self):
         """Return True if the game is tied, and False otherwise."""
-        # TODO: check whether a tie was reached.
-        # There is no winner and all moves have been tried.
         for r in range(0, 3):
             for c in range(0, 3):
                 if self._current_moves[r][c].label == "":
@@ -92,8 +88,6 @@ class Game:
 
     def toggle_player(self):
         """Return a toggled player."""
-        # TODO: switches self.current_player to the other player.
-        # Hint: https://docs.python.org/3/library/functions.html#next
         if self.current_player == DEFAULT_PLAYERS[0]:
             self.current_player = DEFAULT_PLAYERS[1]
         else:
